@@ -2,17 +2,21 @@
   "name": "hotflix",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://hosseinala.github.io/hotflix",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.90.8",
     "@tanstack/react-query-devtools": "^5.90.2",
     "@tanstack/react-query-next-experimental": "^5.91.0",
     "axios": "^1.13.2",
+    "gh-pages": "^6.3.0",
     "next": "16.0.3",
     "next-video": "^2.5.1",
     "react": "19.2.0",
