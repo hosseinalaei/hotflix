@@ -1,0 +1,8 @@
+@import "tailwindcss";
+
+:root {
+}
+
+body {
+  @apply bg-slate-800 text-slate-200;
+}
