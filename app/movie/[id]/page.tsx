@@ -22,7 +22,7 @@ interface Source {
 const MoviePage = () => {
   const { id } = useParams();
   const { data, isLoading, isError } = useQuery({
-    queryKey: ["movie"],
+    queryKey: [id],
     queryFn: async () => {
       const res = await apiConfig.get(`/movie/${id}`);
       return res?.data;
@@ -34,46 +34,42 @@ const MoviePage = () => {
   console.log(data);
 
   return (
-    <div className="container mx-auto">
-      <h1 className="text-[40px]">{data.title}</h1>
+    <div
+      className="w-full min-h-screen bg-cover bg-center bg-no-repeat"
+      style={{
+        backgroundImage: `url(${data.cover})`,
+        width: "100%",
+        height: "auto",
+      }}
+    >
+      <div className="backdrop-blur-sm bg-slate-200/20 min-h-screen">
+        <div className="container mx-auto py-10">
+          <h1 className="text-[40px] font-bold text-white">{data.title}</h1>
 
-      <div className="flex">
-        <div className="w-1/2 flex gap-2">
-          <Image
-            alt="movie image"
-            src={data.image}
-            width={0}
-            height={0}
-            sizes="100vw"
-            style={{ width: "50%", height: "auto" }}
-          />
-          <div className="w-1/2 flex flex-col">
-            <title>{data.title}</title>
-            {/* <ul>
-              {data.genres.map((item: any) => (
-                <li key={item.it}>{item.title}</li>
-              ))}
-            </ul> */}
+          <div className="flex mt-6">
+            <div className="w-1/2 flex gap-2">
+              <Image
+                alt="movie image"
+                src={data.image}
+                width={0}
+                height={0}
+                sizes="100vw"
+                style={{ width: "50%", height: "auto" }}
+              />
+
+              <div className="w-1/2 flex flex-col text-white">
+                <title>{data.title}</title>
+              </div>
+            </div>
+
+            {data?.sources[0]?.url && (
+              <div className="w-1/2">
+                <Player src={data?.sources[0]?.url} />
+              </div>
+            )}
           </div>
         </div>
-
-        {data?.sources[0]?.url && (
-          <div className="w-1/2">
-            <Player src={data?.sources[0]?.url} />
-          </div>
-        )}
       </div>
-
-      {/* <div className="grid grid-cols-6">
-        {data?.sources.map((item: Source) => {
-          return (
-            <div key={item.id} className="flex flex-col">
-              {item.quality}
-              <Player src={item.url} />
-            </div>
-          );
-        })}
-      </div> */}
     </div>
   );
 };

@@ -21,11 +21,13 @@ const CategoriesPage = () => {
   if (isError) return <p>Error fetching movies 😢</p>;
 
   return (
-    <div className="grid grid-cols-6">
+    <div className="grid grid-cols-6 container mx-auto gap-4 my-10">
       {data?.map((item: Categories) => {
         return (
           <Link href={`/categories/${item.id}`} key={item.id}>
-            <p>{item.title}</p>
+            <div className="border border-amber-300 rounded-md flex justify-center py-4">
+              <p>{item.title}</p>
+            </div>
           </Link>
         );
         // return <CategoriCard title={item.name} key={item.id} />;

@@ -7,7 +7,7 @@ const nextConfig: NextConfig = {
   images: {
     domains: ["kimchiapp.info", "simbaapp.info"],
   },
-  output: "export", // important for static export
+  // output: "export", // important for static export
   basePath: isProd ? "/hotflix" : "",
   assetPrefix: isProd ? "/hotflix/" : "",
 };
