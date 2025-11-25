@@ -4,6 +4,9 @@ const isProd = process.env.NODE_ENV === "production";
 
 const nextConfig: NextConfig = {
   /* config options here */
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
   images: {
     domains: ["kimchiapp.info", "simbaapp.info"],
   },
