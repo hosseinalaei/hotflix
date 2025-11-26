@@ -10,19 +10,22 @@ const Search = () => {
   const [searchModal, setSearchModal] = useState(false);
   const [term, setTerm] = useState("");
   const [searchResult, setSearchResult] = useState([]);
-  const handleSearch = async () => {
-    try {
-      const response = await apiConfig.get(`/search?q=${term}&page=1`);
-      setSearchResult(response.data);
-    } catch (e) {
-      console.log(e);
-    }
-  };
+
   useEffect(() => {
     if (term.length > 3) {
-      handleSearch();
+      const timeout = setTimeout(async () => {
+        try {
+          const res = await apiConfig.get(`/search?q=${term}&page=1`);
+          setSearchResult(res.data);
+        } catch (e) {
+          console.log(e);
+        }
+      }, 300);
+
+      return () => clearTimeout(timeout);
     }
   }, [term]);
+
   return (
     <>
       <svg
