@@ -42,7 +42,7 @@ const MoviePage = () => {
         height: "auto",
       }}
     >
-      <div className="backdrop-blur-sm bg-slate-200/20 min-h-screen">
+      <div className="backdrop-blur-sm bg-slate-800/60 min-h-screen">
         <div className="container mx-auto py-10">
           <h1 className="text-[40px] font-bold text-white">{data.title}</h1>
 
@@ -77,6 +77,51 @@ const MoviePage = () => {
                 </video>
               </div>
             )}
+          </div>
+
+          <div id="accordion-card" data-accordion="collapse">
+            <h2 id="accordion-card-heading-1">
+              <button
+                type="button"
+                className="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-body rounded-base shadow-xs border border-default hover:text-heading hover:bg-neutral-secondary-medium gap-3 [&[aria-expanded='true']]:rounded-b-none [&[aria-expanded='true']]:shadow-none"
+                data-accordion-target="#accordion-card-body-1"
+                aria-expanded="true"
+                aria-controls="accordion-card-body-1"
+              >
+                <span>What is Flowbite?</span>
+                <svg
+                  data-accordion-icon
+                  className="w-5 h-5 rotate-180 shrink-0"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="m5 15 7-7 7 7"
+                  />
+                </svg>
+              </button>
+            </h2>
+            <div
+              id="accordion-card-body-1"
+              className="hidden border border-t-0 border-default rounded-b-base shadow-xs"
+              aria-labelledby="accordion-card-heading-1"
+            >
+              <div className="p-4 md:p-5">
+                <p className="mb-2 text-body">
+                  Flowbite is an open-source library of interactive components
+                  built on top of Tailwind CSS including buttons, dropdowns,
+                  modals, navbars, and more.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
