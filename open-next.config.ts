@@ -1,7 +1,5 @@
 import type { OpenNextConfig } from "@opennextjs/cloudflare";
 
-const config: OpenNextConfig = {
-  // empty config is valid!
-};
+const config: OpenNextConfig = {};
 
 export default config;
