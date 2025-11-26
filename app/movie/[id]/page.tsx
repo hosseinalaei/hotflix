@@ -65,6 +65,16 @@ const MoviePage = () => {
             {data?.sources[0]?.url && (
               <div className="w-1/2">
                 <Player src={data?.sources[0]?.url} />
+                <video width="320" height="240" controls preload="none">
+                  <source src={data?.sources[0]?.url} type="video/mp4" />
+                  <track
+                    src="/path/to/captions.vtt"
+                    kind="subtitles"
+                    srcLang="en"
+                    label="English"
+                  />
+                  Your browser does not support the video tag.
+                </video>
               </div>
             )}
           </div>
