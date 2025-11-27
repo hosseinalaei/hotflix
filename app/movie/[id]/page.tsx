@@ -83,7 +83,7 @@ const MoviePage = () => {
       <div className="backdrop-blur-sm bg-slate-800/60 min-h-screen">
         <div className="container mx-auto py-10">
           <div className="flex flex-col md:flex-row my-6 gap-4 px-2">
-            <div className="w-1/3">
+            <div className="w-ful md:w-1/3">
               <Image
                 alt="movie image"
                 src={data.image}

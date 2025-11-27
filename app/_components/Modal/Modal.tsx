@@ -41,7 +41,7 @@ export default function Modal({
       />
 
       {/* Modal */}
-      <div className="relative bg-white rounded-lg shadow-xl w-1/2 mx-4 max-h-[90vh] overflow-y-auto">
+      <div className="relative bg-white rounded-lg shadow-xl w-full md:w-1/2 mx-4 max-h-[90vh] overflow-y-auto">
         {children}
       </div>
     </div>

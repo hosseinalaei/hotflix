@@ -6,12 +6,14 @@ import Search from "./Search";
 const Header = () => {
   return (
     <div className="py-8 border-b border-slate-500">
-      <div className="grid grid-cols-3 container mx-auto">
-        <Image src={Logo} alt="logo" width={100} height={50} />
-        <div className="flex justify-center gap-10">
-          <Menu />
+      <div className="flex flex-col md:grid md:grid-cols-3 container mx-auto gap-2">
+        <div className="mx-auto md:mx-0">
+          <Image src={Logo} alt="logo" width={100} height={50} />
         </div>
-        <Search />
+        <div className="flex justify-center gap-5">
+          <Menu />
+          <Search />
+        </div>
       </div>
     </div>
   );
