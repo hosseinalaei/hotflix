@@ -2,6 +2,9 @@
 import { useQuery } from "@tanstack/react-query";
 import { apiConfig } from "../api/api";
 import Link from "next/link";
+import Loading from "../_components/Loading/Loading";
+import Skeleton from "../_components/Skeleton/Skeleton";
+import Button from "../_components/Button/Button";
 // import CategoriCard from "../../components/CategoriCard";
 
 interface Categories {
@@ -10,15 +13,15 @@ interface Categories {
 }
 const CategoriesPage = () => {
   const { data, isLoading, isError } = useQuery({
-    queryKey: ["genres"],
+    queryKey: ["id"],
     queryFn: async () => {
       const res = await apiConfig.get(`/genre`);
       return res?.data;
     },
   });
 
-  if (isLoading) return <p>Loading...</p>;
-  if (isError) return <p>Error fetching movies 😢</p>;
+  if (isLoading) return <Loading />;
+  if (isError) return <p>Error fetching categories 😢</p>;
   if (data.length === 0) return <p>there is no data...</p>;
 
   return (
@@ -26,9 +29,9 @@ const CategoriesPage = () => {
       {data?.map((item: Categories) => {
         return (
           <Link href={`/categories/${item.id}`} key={item.id}>
-            <div className="border border-amber-300 rounded-md flex justify-center py-4">
-              <p>{item.title}</p>
-            </div>
+            {/* <div className="border border-amber-300 rounded-md flex justify-center py-4">
+            </div> */}
+            <Button>{item.title}</Button>
           </Link>
         );
         // return <CategoriCard title={item.name} key={item.id} />;

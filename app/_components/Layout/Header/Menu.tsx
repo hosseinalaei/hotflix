@@ -2,12 +2,12 @@ import Link from "next/link";
 const menuItems = [
   {
     id: 1,
-    title: "Home",
+    title: "خانه",
     path: "/",
   },
   {
     id: 2,
-    title: "Categories",
+    title: "دسته بندی ها",
     path: "/categories",
   },
   // {

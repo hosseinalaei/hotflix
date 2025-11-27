@@ -10,7 +10,7 @@ function Accordion({
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="bg-slate-700 rounded-md border-r-amber-600 border-r-4 px-4">
+    <div className="bg-slate-700 rounded-md border-r-amber-600 border-r-4 px-4 cursor-pointer">
       <button
         onClick={() => setOpen(!open)}
         className="w-full flex justify-between items-center py-4 text-left"

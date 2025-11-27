@@ -3,11 +3,12 @@ import { useQuery } from "@tanstack/react-query";
 import { apiConfig } from "../../api/api";
 import { useParams } from "next/navigation";
 // import CategoriCard from "../../components/CategoriCard";
-import Video from "next-video";
+// import Video from "next-video";
 import Player from "next-video/player";
 import Image from "next/image";
 import Accordion from "@/app/_components/Accordian/Accordian";
 import { useState } from "react";
+import Loading from "@/app/_components/Loading/Loading";
 
 interface Categories {
   id: number;
@@ -67,9 +68,8 @@ const MoviePage = () => {
     setTimeout(() => setCopied(false), 2000);
   };
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <Loading />;
   if (isError) return <p>Error fetching movies 😢</p>;
-  console.log(data);
 
   return (
     <div
@@ -83,17 +83,17 @@ const MoviePage = () => {
       <div className="backdrop-blur-sm bg-slate-800/60 min-h-screen">
         <div className="container mx-auto py-10">
           <div className="flex flex-col md:flex-row my-6 gap-4 px-2">
-            <div className="w-ful md:w-1/3">
+            <div className="w-full md:w-1/3">
               <Image
                 alt="movie image"
                 src={data.image}
                 width={0}
                 height={0}
-                sizes="200vw"
+                sizes="100vw"
                 style={{ width: "100%", height: "auto", borderRadius: "10px" }}
               />
             </div>
-            <div className="flex flex-col">
+            <div className="flex flex-col w-full md:w-2/3">
               <h1 className="text-[30px] font-bold text-white">{data.title}</h1>
               <div className="whitespace-pre-line">{data.description}</div>
             </div>
@@ -118,7 +118,23 @@ const MoviePage = () => {
                         </div>
                       </div>
                       <span style={{ direction: "ltr" }}>
-                        <Player src={item.url} />
+                        {/* <Player src={item.url} /> */}
+
+                        <video
+                          width="100%"
+                          height="100%"
+                          controls
+                          preload="none"
+                        >
+                          <source src={item.url} type="video/mp4" />
+                          <track
+                            src="/path/to/captions.vtt"
+                            kind="subtitles"
+                            srcLang="en"
+                            label="English"
+                          />
+                          Your browser does not support the video tag.
+                        </video>
                       </span>
                     </>
                   </Accordion>
