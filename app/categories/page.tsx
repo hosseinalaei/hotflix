@@ -22,7 +22,7 @@ const CategoriesPage = () => {
   if (data.length === 0) return <p>there is no data...</p>;
 
   return (
-    <div className="grid grid-cols-6 container mx-auto gap-4 my-10">
+    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 container mx-auto gap-4 my-10">
       {data?.map((item: Categories) => {
         return (
           <Link href={`/categories/${item.id}`} key={item.id}>

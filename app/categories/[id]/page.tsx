@@ -31,7 +31,7 @@ const CategoriesPage = () => {
   console.log(data);
 
   return (
-    <div className="grid grid-cols-6 gap-4 container mx-auto my-10">
+    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 container mx-auto my-10">
       {data?.map((item: Categories) => {
         return (
           <Link href={`/movie/${item.id}`} key={item.id}>

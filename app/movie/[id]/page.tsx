@@ -82,14 +82,14 @@ const MoviePage = () => {
     >
       <div className="backdrop-blur-sm bg-slate-800/60 min-h-screen">
         <div className="container mx-auto py-10">
-          <div className="flex my-6 gap-4">
-            <div className="">
+          <div className="flex flex-col md:flex-row my-6 gap-4 px-2">
+            <div className="w-1/3">
               <Image
                 alt="movie image"
                 src={data.image}
                 width={0}
                 height={0}
-                sizes="150vw"
+                sizes="200vw"
                 style={{ width: "100%", height: "auto", borderRadius: "10px" }}
               />
             </div>
@@ -102,7 +102,7 @@ const MoviePage = () => {
           {data.sources.length > 0 &&
             data.sources.map((item: any) => {
               return (
-                <div className="my-2" key={item.id}>
+                <div className="my-2 px-2" key={item.id}>
                   <Accordion title={item.quality}>
                     <>
                       <div className="flex gap-2 items-center">
