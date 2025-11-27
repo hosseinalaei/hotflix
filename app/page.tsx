@@ -13,8 +13,8 @@ export default function Home() {
   console.log(data);
 
   return (
-    <main>
-      <h1>aaaaa</h1>
+    <main className="container mx-auto">
+      <h1>Hotflix</h1>
     </main>
   );
 }

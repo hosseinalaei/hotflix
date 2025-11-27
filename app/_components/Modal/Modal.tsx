@@ -14,17 +14,13 @@ export default function Modal({
   children,
   closeOnOverlayClick = true,
 }: ModalProps) {
-  // Close modal on Escape key press
   useEffect(() => {
     const handleEscape = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        onClose();
-      }
+      if (event.key === "Escape") onClose();
     };
 
     if (isOpen) {
       document.addEventListener("keydown", handleEscape);
-      // Prevent body scroll when modal is open
       document.body.style.overflow = "hidden";
     }
 
@@ -37,15 +33,15 @@ export default function Modal({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center">
+    <div className="fixed inset-0 z-50 flex items-start justify-center pt-10">
       {/* Overlay */}
       <div
-        className="absolute inset-0 bg-slate-500/50 bg-opacity-50 transition-opacity"
+        className="absolute inset-0 bg-slate-500/50 transition-opacity"
         onClick={closeOnOverlayClick ? onClose : undefined}
       />
 
-      {/* Modal container */}
-      <div className="relative bg-white rounded-lg shadow-xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+      {/* Modal */}
+      <div className="relative bg-white rounded-lg shadow-xl w-1/2 mx-4 max-h-[90vh] overflow-y-auto">
         {children}
       </div>
     </div>

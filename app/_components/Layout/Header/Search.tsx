@@ -26,6 +26,12 @@ const Search = () => {
     }
   }, [term]);
 
+  useEffect(() => {
+    if (!searchModal) {
+      setSearchResult([]);
+    }
+  }, [searchModal]);
+
   return (
     <>
       <svg
@@ -50,14 +56,14 @@ const Search = () => {
         onClose={() => setSearchModal(false)}
         closeOnOverlayClick={true}
       >
-        <ModalHeader title="Search" onClose={() => setSearchModal(false)} />
+        <ModalHeader title="جستجو" onClose={() => setSearchModal(false)} />
 
         <ModalBody>
           <div className="mt-4">
             <input
               onChange={(e) => setTerm(e.target.value)}
               type="text"
-              placeholder="search..."
+              placeholder="جستجو ..."
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500"
             />
           </div>
@@ -70,6 +76,7 @@ const Search = () => {
                     poster={item.image}
                     title={item.title}
                     id={item.id}
+                    closeModal={setSearchModal}
                   />
                 );
               })}

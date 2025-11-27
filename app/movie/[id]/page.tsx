@@ -3,9 +3,11 @@ import { useQuery } from "@tanstack/react-query";
 import { apiConfig } from "../../api/api";
 import { useParams } from "next/navigation";
 // import CategoriCard from "../../components/CategoriCard";
-// import Video from "next-video";
+import Video from "next-video";
 import Player from "next-video/player";
 import Image from "next/image";
+import Accordion from "@/app/_components/Accordian/Accordian";
+import { useState } from "react";
 
 interface Categories {
   id: number;
@@ -29,6 +31,42 @@ const MoviePage = () => {
     },
   });
 
+  const CopyIcon = () => (
+    <svg
+      width="18"
+      height="18"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      viewBox="0 0 24 24"
+    >
+      <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+      <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+    </svg>
+  );
+
+  const CheckIcon = () => (
+    <svg
+      width="18"
+      height="18"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="3"
+      viewBox="0 0 24 24"
+    >
+      <path d="M20 6L9 17l-5-5" />
+    </svg>
+  );
+  const [copied, setCopied] = useState(false);
+
+  const copyToClipboard = async (url: any) => {
+    await navigator.clipboard.writeText(url);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
   if (isLoading) return <p>Loading...</p>;
   if (isError) return <p>Error fetching movies 😢</p>;
   console.log(data);
@@ -44,85 +82,49 @@ const MoviePage = () => {
     >
       <div className="backdrop-blur-sm bg-slate-800/60 min-h-screen">
         <div className="container mx-auto py-10">
-          <h1 className="text-[40px] font-bold text-white">{data.title}</h1>
-
-          <div className="flex mt-6">
-            <div className="w-1/2 flex gap-2">
+          <div className="flex my-6 gap-4">
+            <div className="">
               <Image
                 alt="movie image"
                 src={data.image}
                 width={0}
                 height={0}
-                sizes="100vw"
-                style={{ width: "50%", height: "auto" }}
+                sizes="150vw"
+                style={{ width: "100%", height: "auto", borderRadius: "10px" }}
               />
-
-              <div className="w-1/2 flex flex-col text-white">
-                <title>{data.title}</title>
-              </div>
             </div>
-
-            {data?.sources[0]?.url && (
-              <div className="w-1/2">
-                <Player src={data?.sources[0]?.url} />
-                <video width="320" height="240" controls preload="none">
-                  <source src={data?.sources[0]?.url} type="video/mp4" />
-                  <track
-                    src="/path/to/captions.vtt"
-                    kind="subtitles"
-                    srcLang="en"
-                    label="English"
-                  />
-                  Your browser does not support the video tag.
-                </video>
-              </div>
-            )}
-          </div>
-
-          <div id="accordion-card" data-accordion="collapse">
-            <h2 id="accordion-card-heading-1">
-              <button
-                type="button"
-                className="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-body rounded-base shadow-xs border border-default hover:text-heading hover:bg-neutral-secondary-medium gap-3 [&[aria-expanded='true']]:rounded-b-none [&[aria-expanded='true']]:shadow-none"
-                data-accordion-target="#accordion-card-body-1"
-                aria-expanded="true"
-                aria-controls="accordion-card-body-1"
-              >
-                <span>What is Flowbite?</span>
-                <svg
-                  data-accordion-icon
-                  className="w-5 h-5 rotate-180 shrink-0"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="m5 15 7-7 7 7"
-                  />
-                </svg>
-              </button>
-            </h2>
-            <div
-              id="accordion-card-body-1"
-              className="hidden border border-t-0 border-default rounded-b-base shadow-xs"
-              aria-labelledby="accordion-card-heading-1"
-            >
-              <div className="p-4 md:p-5">
-                <p className="mb-2 text-body">
-                  Flowbite is an open-source library of interactive components
-                  built on top of Tailwind CSS including buttons, dropdowns,
-                  modals, navbars, and more.
-                </p>
-              </div>
+            <div className="flex flex-col">
+              <h1 className="text-[30px] font-bold text-white">{data.title}</h1>
+              <div className="whitespace-pre-line">{data.description}</div>
             </div>
           </div>
+
+          {data.sources.length > 0 &&
+            data.sources.map((item: any) => {
+              return (
+                <div className="my-2" key={item.id}>
+                  <Accordion title={item.quality}>
+                    <>
+                      <div className="flex gap-2 items-center">
+                        لینک دانلود:
+                        <div className="bg-slate-800 p-2 my-2 rounded-md">
+                          <button
+                            onClick={() => copyToClipboard(item.url)}
+                            className="ml-2 p-1 hover:bg-slate-700 rounded transition"
+                          >
+                            {copied ? <CheckIcon /> : <CopyIcon />}
+                          </button>
+                          {item.url}
+                        </div>
+                      </div>
+                      <span style={{ direction: "ltr" }}>
+                        <Player src={item.url} />
+                      </span>
+                    </>
+                  </Accordion>
+                </div>
+              );
+            })}
         </div>
       </div>
     </div>

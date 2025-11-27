@@ -1,13 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 
-const SearchCard = ({ poster, id, title }: any) => {
+const SearchCard = ({ poster, id, title, closeModal }: any) => {
   return (
-    <Link href={`/movie/${id}`}>
-      <div className="bg-neutral-primary-soft block max-w-sm border border-default rounded-base shadow-xs">
+    <Link href={`/movie/${id}`} onClick={() => closeModal(false)}>
+      <div className="my-2 bg-neutral-primary-soft block max-w-sm border border-default rounded-b-md shadow-xs">
         <Link href={`/movie/${id}`}>
           <Image
-            className="rounded-t-base"
+            className="rounded-t-md"
             src={poster}
             alt="moivie image"
             width={0}
@@ -16,10 +16,8 @@ const SearchCard = ({ poster, id, title }: any) => {
             style={{ width: "100%", height: "100%" }}
           />
         </Link>
-        <div className="p-6 text-center">
-          <h5 className="mt-3 mb-6 text-2xl font-semibold text-slate-800">
-            {title}
-          </h5>
+        <div className="p-2 text-center">
+          <h5 className="font-semibold text-slate-800">{title}</h5>
         </div>
       </div>
     </Link>

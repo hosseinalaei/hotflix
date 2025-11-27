@@ -4,6 +4,8 @@ import { apiConfig } from "../../api/api";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import Image from "next/image";
+import { useState } from "react";
+import ReactPaginate from "react-paginate";
 // import CategoriCard from "../../components/CategoriCard";
 
 interface Categories {
@@ -13,11 +15,12 @@ interface Categories {
 }
 
 const CategoriesPage = () => {
+  const [page, setPage] = useState(1);
   const { id } = useParams();
   const { data, isLoading, isError } = useQuery({
-    queryKey: ["movie", id],
+    queryKey: ["movie", id, page],
     queryFn: async () => {
-      const res = await apiConfig.get(`/category/${id}/sortby/created/1`);
+      const res = await apiConfig.get(`/category/${id}/sortby/created/${page}`);
       return res?.data;
     },
   });
@@ -46,6 +49,9 @@ const CategoriesPage = () => {
         );
         // return <CategoriCard title={item.name} key={item.id} />;
       })}
+      <button onClick={() => setPage(page + 1)} className="cursor-pointer">
+        next
+      </button>
     </div>
   );
 };

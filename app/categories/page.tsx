@@ -19,6 +19,7 @@ const CategoriesPage = () => {
 
   if (isLoading) return <p>Loading...</p>;
   if (isError) return <p>Error fetching movies 😢</p>;
+  if (data.length === 0) return <p>there is no data...</p>;
 
   return (
     <div className="grid grid-cols-6 container mx-auto gap-4 my-10">
