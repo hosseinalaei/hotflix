@@ -1,0 +1,39 @@
+{
+  "node_modules/@tanstack/query-devtools/build/index.js -> ./DevtoolsComponent/Q7LWSL4U.js": {
+    "id": null,
+    "files": []
+  },
+  "node_modules/@tanstack/query-devtools/build/index.js -> ./DevtoolsPanelComponent/VLTTJS3N.js": {
+    "id": null,
+    "files": []
+  },
+  "node_modules/dash-video-element/dist/dash-video-element.js -> dashjs": {
+    "id": 4462,
+    "files": [
+      "static/chunks/f5cf3357.ab726c5d34d0cdc3.js"
+    ]
+  },
+  "node_modules/next-video/dist/components/players/media/index.js -> @mux/mux-video/react": {
+    "id": 4812,
+    "files": [
+      "static/chunks/a4634e51.2c687a4b8afb5da0.js",
+      "static/chunks/842.244dd3a17ea95e9a.js",
+      "static/chunks/812.20eec51592c159d8.js"
+    ]
+  },
+  "node_modules/next-video/dist/components/players/media/index.js -> dash-video-element/react": {
+    "id": 6521,
+    "files": [
+      "static/chunks/842.244dd3a17ea95e9a.js",
+      "static/chunks/521.90ce8d0aae92604b.js"
+    ]
+  },
+  "node_modules/next-video/dist/components/players/media/index.js -> hls-video-element/react": {
+    "id": 5136,
+    "files": [
+      "static/chunks/a4634e51.2c687a4b8afb5da0.js",
+      "static/chunks/842.244dd3a17ea95e9a.js",
+      "static/chunks/136.02d29496a0724d41.js"
+    ]
+  }
+}
