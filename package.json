@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:cloudflare": "npx opennextjs-cloudflare",
     "start": "next start",
     "lint": "eslint",
     "deploy": "npx @cloudflare/next-on-pages"
@@ -20,10 +21,11 @@
     "next-video": "^2.5.1",
     "react": "19.2.0",
     "react-dom": "19.2.0",
-    "react-paginate": "^8.3.0"
+    "react-paginate": "^8.3.0",
+    "wrangler": "^4.51.0"
   },
   "devDependencies": {
-    "@opennextjs/cloudflare": "^1.13.1",
+    "@opennextjs/cloudflare": "^1.14.0",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
