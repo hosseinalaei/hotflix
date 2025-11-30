@@ -1,14 +1,14 @@
+// open-next.config.ts
+
 export default {
-  // REQUIRED for Cloudflare
+  // Required so OpenNext knows you're deploying to Cloudflare
   deploy: {
     platform: "cloudflare",
   },
 
-  // OPTIONAL (recommended)
+  // Recommended (Cloudflare Workers require a date)
   compatibilityDate: "2024-01-01",
 
-  // Optional output directory
+  // Recommended output directory for OpenNext build
   outDir: ".open-next",
-
-  // Add Cloudflare bindings (KV, R2, D1...) here later if needed
 };
