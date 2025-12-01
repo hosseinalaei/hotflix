@@ -70,6 +70,7 @@ const MoviePage = () => {
 
   if (isLoading) return <Loading />;
   if (isError) return <p>Error fetching movies 😢</p>;
+  console.log("data", data);
 
   return (
     <div
@@ -118,15 +119,20 @@ const MoviePage = () => {
                         </div>
                       </div>
                       <span style={{ direction: "ltr" }}>
-                        <Player src={item.url} />
+                        {/* <Player src={item.url} /> */}
 
-                        {/* <video
+                        <video
                           width="100%"
                           height="100%"
                           controls
                           preload="none"
                         >
-                          <source src={item.url} type="video/mp4" />
+                          <source
+                            src={item.url}
+                            type={`video/${
+                              item.type === "mp4" ? "mp4" : "x-matroska"
+                            }`}
+                          />
                           <track
                             src="/path/to/captions.vtt"
                             kind="subtitles"
@@ -134,7 +140,7 @@ const MoviePage = () => {
                             label="English"
                           />
                           Your browser does not support the video tag.
-                        </video> */}
+                        </video>
                       </span>
                     </>
                   </Accordion>
