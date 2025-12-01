@@ -6,9 +6,6 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "preview": "opennextjs-cloudflare build && wrangle rev",
-    "deploy": "opennextjs-cloudflare build && wrangler deploy",
-    "build:cloudflare": "npx opennextjs-cloudflare",
     "start": "next start",
     "lint": "eslint"
   },
