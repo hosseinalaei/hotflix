@@ -1,0 +1,11 @@
+name = "hotflix"
+main = ".open-next/worker.js"
+compatibility_date = "2024-01-01"
+
+# Static assets output from OpenNext
+assets = { directory = ".open-next/assets" }
+
+# (Optional) if you use server routes
+routes = [
+  { pattern = "hotflix-green.vercel.app/*", zone_name = "hotflix-green.vercel.app" }
+]
