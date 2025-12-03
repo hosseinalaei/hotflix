@@ -102,6 +102,9 @@ const MoviePage = () => {
 
           {data.sources.length > 0 &&
             data.sources.map((item: any) => {
+              const url = item.url;
+              console.log("11111", url.substring(7));
+
               return (
                 <div className="my-2 px-2" key={item.id}>
                   <Accordion title={item.quality}>
@@ -119,7 +122,7 @@ const MoviePage = () => {
                         </div>
                       </div>
                       <span style={{ direction: "ltr" }}>
-                        <Player src={item.url} />
+                        <Player src={`http://${url.substring(7)}`} />
 
                         {/* <video
                           width="100%"
