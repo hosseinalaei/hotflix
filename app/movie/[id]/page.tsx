@@ -103,7 +103,6 @@ const MoviePage = () => {
           {data.sources.length > 0 &&
             data.sources.map((item: any) => {
               const url = item.url;
-              console.log("11111", url.substring(7));
 
               return (
                 <div className="my-2 px-2" key={item.id}>
@@ -122,8 +121,32 @@ const MoviePage = () => {
                         </div>
                       </div>
                       <span style={{ direction: "ltr" }}>
-                        <Player src={`http://${url.substring(7)}`} />
-
+                        <iframe>
+                          <Player src={`http://${url.substring(7)}`} />
+                        </iframe>
+                        <pre>
+                          {" "}
+                          <video
+                            width="100%"
+                            height="100%"
+                            controls
+                            preload="none"
+                          >
+                            <source
+                              src="http://peer.tci.cdn.146.dl150m.info/tizer/The.Fantastic.Four.mp4"
+                              type={`video/${
+                                item.type === "mp4" ? "mp4" : "x-matroska"
+                              }`}
+                            />
+                            <track
+                              src="/path/to/captions.vtt"
+                              kind="subtitles"
+                              srcLang="en"
+                              label="English"
+                            />
+                            Your browser does not support the video tag.
+                          </video>{" "}
+                        </pre>
                         {/* <video
                           width="100%"
                           height="100%"
@@ -131,7 +154,7 @@ const MoviePage = () => {
                           preload="none"
                         >
                           <source
-                            src={item.url}
+                            src="http://peer.tci.cdn.146.dl150m.info/tizer/The.Fantastic.Four.mp4"
                             type={`video/${
                               item.type === "mp4" ? "mp4" : "x-matroska"
                             }`}
@@ -144,6 +167,18 @@ const MoviePage = () => {
                           />
                           Your browser does not support the video tag.
                         </video> */}
+                        <pre>
+                          &lt;video width=&quot;100%&quot;
+                          height=&quot;100%&quot; controls
+                          preload=&quot;none&quot; &gt; &lt;source
+                          src=&quot;http://peer.tci.cdn.146.dl150m.info/tizer/The.Fantastic.Four.mp4&quot;
+                          type=&quot;video/$
+                          {item.type === "mp4" ? "mp4" : "x-matroska"}&quot;
+                          /&gt; &lt;track src=&quot;/path/to/captions.vtt&quot;
+                          kind=&quot;subtitles&quot; srcLang=&quot;en&quot;
+                          label=&quot;English&quot; /&gt; Your browser does not
+                          support the video tag. &lt;/video&gt;
+                        </pre>
                       </span>
                     </>
                   </Accordion>
