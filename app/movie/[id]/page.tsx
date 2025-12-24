@@ -7,8 +7,9 @@ import { useParams } from "next/navigation";
 import Player from "next-video/player";
 import Image from "next/image";
 import Accordion from "@/app/_components/Accordian/Accordian";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Loading from "@/app/_components/Loading/Loading";
+import SeriesDlLink from "@/app/_components/SeriesDlLink/SeriesDlLink";
 
 interface Categories {
   id: number;
@@ -68,9 +69,14 @@ const MoviePage = () => {
     setTimeout(() => setCopied(false), 2000);
   };
 
+  // useEffect(() => {
+  //   if (data?.type === "serie") {
+  //     fetchSeriesSession();
+  //   }
+  // }, [data, id]);
+
   if (isLoading) return <Loading />;
   if (isError) return <p>Error fetching movies 😢</p>;
-  console.log("data", data);
 
   return (
     <div
@@ -102,8 +108,6 @@ const MoviePage = () => {
 
           {data.sources.length > 0 &&
             data.sources.map((item: any) => {
-              const url = item.url;
-
               return (
                 <div className="my-2 px-2" key={item.id}>
                   <Accordion title={item.quality}>
@@ -121,70 +125,15 @@ const MoviePage = () => {
                         </div>
                       </div>
                       <span style={{ direction: "ltr" }}>
-                        <iframe>
-                          <Player src={`http://${url.substring(7)}`} />
-                        </iframe>
-                        <pre>
-                          {" "}
-                          <video
-                            width="100%"
-                            height="100%"
-                            controls
-                            preload="none"
-                          >
-                            <source
-                              src="http://peer.tci.cdn.146.dl150m.info/tizer/The.Fantastic.Four.mp4"
-                              type={`video/${
-                                item.type === "mp4" ? "mp4" : "x-matroska"
-                              }`}
-                            />
-                            <track
-                              src="/path/to/captions.vtt"
-                              kind="subtitles"
-                              srcLang="en"
-                              label="English"
-                            />
-                            Your browser does not support the video tag.
-                          </video>{" "}
-                        </pre>
-                        {/* <video
-                          width="100%"
-                          height="100%"
-                          controls
-                          preload="none"
-                        >
-                          <source
-                            src="http://peer.tci.cdn.146.dl150m.info/tizer/The.Fantastic.Four.mp4"
-                            type={`video/${
-                              item.type === "mp4" ? "mp4" : "x-matroska"
-                            }`}
-                          />
-                          <track
-                            src="/path/to/captions.vtt"
-                            kind="subtitles"
-                            srcLang="en"
-                            label="English"
-                          />
-                          Your browser does not support the video tag.
-                        </video> */}
-                        <pre>
-                          &lt;video width=&quot;100%&quot;
-                          height=&quot;100%&quot; controls
-                          preload=&quot;none&quot; &gt; &lt;source
-                          src=&quot;http://peer.tci.cdn.146.dl150m.info/tizer/The.Fantastic.Four.mp4&quot;
-                          type=&quot;video/$
-                          {item.type === "mp4" ? "mp4" : "x-matroska"}&quot;
-                          /&gt; &lt;track src=&quot;/path/to/captions.vtt&quot;
-                          kind=&quot;subtitles&quot; srcLang=&quot;en&quot;
-                          label=&quot;English&quot; /&gt; Your browser does not
-                          support the video tag. &lt;/video&gt;
-                        </pre>
+                        <Player src={item.url} />
                       </span>
                     </>
                   </Accordion>
                 </div>
               );
             })}
+
+          {data?.type === "serie" && <SeriesDlLink id={id} />}
         </div>
       </div>
     </div>
