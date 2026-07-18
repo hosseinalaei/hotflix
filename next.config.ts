@@ -1,24 +1,30 @@
 import type { NextConfig } from "next";
-
-// const isProd = process.env.NODE_ENV === "production";
+import path from "path";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  outputFileTracingRoot: path.join(__dirname),
   eslint: {
     ignoreDuringBuilds: true,
   },
-  output: "standalone",
   experimental: {
     serverActions: {
       allowedOrigins: ["*"],
     },
   },
   images: {
-    domains: ["kimchiapp.info", "simbaapp.info", ".giftmond.ir"],
+    remotePatterns: [
+      { protocol: "https", hostname: "kimchiapp.info" },
+      { protocol: "http", hostname: "kimchiapp.info" },
+      { protocol: "https", hostname: "simbaapp.info" },
+      { protocol: "http", hostname: "simbaapp.info" },
+      { protocol: "https", hostname: "**.giftmond.ir" },
+      { protocol: "http", hostname: "**.giftmond.ir" },
+      { protocol: "https", hostname: "movie.one-dev.ir" },
+      { protocol: "http", hostname: "movie.one-dev.ir" },
+      { protocol: "https", hostname: "**.dl175m.info" },
+      { protocol: "http", hostname: "**.dl175m.info" },
+    ],
   },
-  // output: "export", // important for static export
-  // basePath: isProd ? "/hotflix" : "",
-  // assetPrefix: isProd ? "/hotflix/" : "",
 };
 
 export default nextConfig;
