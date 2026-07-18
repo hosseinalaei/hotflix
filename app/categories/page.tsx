@@ -22,7 +22,7 @@ const CategoriesPage = () => {
 
   if (isLoading) return <Loading />;
   if (isError) return <p>Error fetching categories 😢</p>;
-  if (data.length === 0) return <p>there is no data...</p>;
+  if (data?.length === 0) return <p>there is no data...</p>;
 
   return (
     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 container mx-auto gap-4 my-10">

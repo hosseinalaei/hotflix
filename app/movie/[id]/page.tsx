@@ -2,26 +2,9 @@
 import { useQuery } from "@tanstack/react-query";
 import { apiConfig } from "../../api/api";
 import { useParams } from "next/navigation";
-// import CategoriCard from "../../components/CategoriCard";
-// import Video from "next-video";
-import Player from "next-video/player";
 import Image from "next/image";
-import Accordion from "@/app/_components/Accordian/Accordian";
-import { useEffect, useState } from "react";
 import Loading from "@/app/_components/Loading/Loading";
-import SeriesDlLink from "@/app/_components/SeriesDlLink/SeriesDlLink";
-
-interface Categories {
-  id: number;
-  title: string;
-}
-
-interface Source {
-  id: number;
-  quality: string;
-  type: string;
-  url: string;
-}
+import MediaSources from "@/app/_components/MediaSources/MediaSources";
 
 const MoviePage = () => {
   const { id } = useParams();
@@ -32,48 +15,6 @@ const MoviePage = () => {
       return res?.data;
     },
   });
-
-  const CopyIcon = () => (
-    <svg
-      width="18"
-      height="18"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      viewBox="0 0 24 24"
-    >
-      <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-      <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-    </svg>
-  );
-
-  const CheckIcon = () => (
-    <svg
-      width="18"
-      height="18"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="3"
-      viewBox="0 0 24 24"
-    >
-      <path d="M20 6L9 17l-5-5" />
-    </svg>
-  );
-  const [copied, setCopied] = useState(false);
-
-  const copyToClipboard = async (url: any) => {
-    await navigator.clipboard.writeText(url);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
-
-  // useEffect(() => {
-  //   if (data?.type === "serie") {
-  //     fetchSeriesSession();
-  //   }
-  // }, [data, id]);
 
   if (isLoading) return <Loading />;
   if (isError) return <p>Error fetching movies 😢</p>;
@@ -106,34 +47,13 @@ const MoviePage = () => {
             </div>
           </div>
 
-          {data.sources.length > 0 &&
-            data.sources.map((item: any) => {
-              return (
-                <div className="my-2 px-2" key={item.id}>
-                  <Accordion title={item.quality}>
-                    <>
-                      <div className="flex gap-2 items-center">
-                        لینک دانلود:
-                        <div className="bg-slate-800 p-2 my-2 rounded-md">
-                          <button
-                            onClick={() => copyToClipboard(item.url)}
-                            className="ml-2 p-1 hover:bg-slate-700 rounded transition"
-                          >
-                            {copied ? <CheckIcon /> : <CopyIcon />}
-                          </button>
-                          {item.url}
-                        </div>
-                      </div>
-                      <span style={{ direction: "ltr" }}>
-                        <Player src={item.url} />
-                      </span>
-                    </>
-                  </Accordion>
-                </div>
-              );
-            })}
-
-          {data?.type === "serie" && <SeriesDlLink id={id} />}
+          <MediaSources
+            id={id}
+            type={data.type}
+            title={data.title}
+            poster={data.cover}
+            sources={data.sources}
+          />
         </div>
       </div>
     </div>
