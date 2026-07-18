@@ -13,23 +13,31 @@ type VideoPlayerProps = {
   poster?: string;
 };
 
+const getProxyBase = () =>
+  process.env.NEXT_PUBLIC_STREAM_PROXY_URL?.replace(/\/$/, "") || "/api/stream";
+
+const toPlayableSrc = (src: string) => {
+  try {
+    const url = new URL(src);
+    if (url.protocol !== "http:") return src;
+
+    const pageIsHttps =
+      typeof window !== "undefined" && window.location.protocol === "https:";
+
+    // Only proxy on HTTPS pages (mixed content). Keep direct http on localhost.
+    if (!pageIsHttps) return src;
+
+    return `${getProxyBase()}?url=${encodeURIComponent(src)}`;
+  } catch {
+    return src;
+  }
+};
+
 const VideoPlayer = ({ src, title, poster }: VideoPlayerProps) => {
   const [playableSrc, setPlayableSrc] = useState(src);
 
   useEffect(() => {
-    try {
-      const url = new URL(src);
-      const pageIsHttps = window.location.protocol === "https:";
-
-      if (pageIsHttps && url.protocol === "http:") {
-        setPlayableSrc(`/api/stream?url=${encodeURIComponent(src)}`);
-        return;
-      }
-    } catch {
-      // keep original src
-    }
-
-    setPlayableSrc(src);
+    setPlayableSrc(toPlayableSrc(src));
   }, [src]);
 
   if (!src) return null;
@@ -40,6 +48,7 @@ const VideoPlayer = ({ src, title, poster }: VideoPlayerProps) => {
       dir="ltr"
     >
       <MediaPlayer
+        key={playableSrc}
         title={title}
         src={{ src: playableSrc, type: "video/mp4" }}
         poster={poster}
